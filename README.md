@@ -5,7 +5,7 @@
 - Hyprland  
 - Waybar  
 - Neovim  
-## Aditional Information. 
+## Aditional Information 
 - grml zsh config
 - Catppuccin mocha kitty 
 - rofi configs by github.com/adi1090x
