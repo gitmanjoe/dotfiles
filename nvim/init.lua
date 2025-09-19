@@ -27,14 +27,18 @@ require("lazy").setup({
 	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }},
 	{"mason-org/mason.nvim", opts = {}},
 	{"neovim/nvim-lspconfig"},
+	{ 'RaafatTurki/hex.nvim' },
 	{"hrsh7th/nvim-cmp",dependencies = { "hrsh7th/cmp-nvim-lsp" }},
 	{'romgrk/barbar.nvim',dependencies = {'lewis6991/gitsigns.nvim'}, init = function() vim.g.barbar_auto_setup = false end, opts = {},version = '^1.0.0', },
 	{"nvim-tree/nvim-tree.lua"},
---	{"registerGen/clock.nvim"},
+	{"registerGen/clock.nvim"},
 	{ "nvim-tree/nvim-web-devicons", opts = {} },
-	{ 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }}
+	{ 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }},
+--	{'nvimdev/dashboard-nvim',event = 'VimEnter',config = function() require('dashboard').setup {} end, dependencies = { {'nvim-tree/nvim-web-devicons'}},
+	{ "nvim-treesitter/nvim-treesitter",dependencies = { "OXY2DEV/markview.nvim" }, lazy = false,}
+
   },
-  -- Configure any other settings here. See the documentation for more details.
+  -- Configure any other settings here. See the documentation for more detais.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
   -- automatically check for plugin updates
@@ -95,9 +99,6 @@ require("catppuccin").setup({
     },
 })
 
--- setup must be called before loading
-vim.cmd.colorscheme "catppuccin"
-
 --Set Color scheme
 vim.cmd.colorscheme "catppuccin"
 
@@ -150,7 +151,9 @@ require("nvim-tree").setup()
 --Set Keymaps
 vim.keymap.set('n', '<C-z>', '<C-w>w', { noremap = true })
 vim.keymap.set("n", "<leader>to", ":NvimTreeToggle<CR>")
---[[init Clock
+vim.keymap.set("n", "<leader>ct", ":ClockToggle<CR>")
+
+--init Clock
 require("clock").setup({
   auto_start = false,
   float = {
@@ -179,7 +182,7 @@ require("clock").setup({
   separator_hl = "NormalText",
   time_format = "%H:%M:%S",
   update_time = 500, -- update the clock text once per <update_time> (in ms)
-})]]
+})
 
 
 -- Set kemaps for tabs
@@ -258,3 +261,6 @@ require('lualine').setup {
   inactive_winbar = {},
   extensions = {}
 }
+
+-- hex viewer
+require 'hex'.setup()
