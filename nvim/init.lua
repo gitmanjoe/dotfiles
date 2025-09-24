@@ -19,11 +19,13 @@ vim.opt.rtp:prepend(lazypath)
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
+vim.opt.termguicolors = true
 
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
 	{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+	{'edluffy/hologram.nvim'},
 	{'nvim-telescope/telescope.nvim', tag = '0.1.8',dependencies = { 'nvim-lua/plenary.nvim' }},
 	{"mason-org/mason.nvim", opts = {}},
 	{"neovim/nvim-lspconfig"},
@@ -32,6 +34,34 @@ require("lazy").setup({
 	{'romgrk/barbar.nvim',dependencies = {'lewis6991/gitsigns.nvim'}, init = function() vim.g.barbar_auto_setup = false end, opts = {},version = '^1.0.0', },
 	{"nvim-tree/nvim-tree.lua"},
 	{"registerGen/clock.nvim"},
+	{'rcarriga/nvim-notify'},
+	{
+		'AntonVanAssche/music-controls.nvim',
+		opts = {
+		default_player = 'vlc'
+		}
+	},
+	{
+		"kdheepak/lazygit.nvim", 
+		lazy = true,
+		cmd = {
+        		"LazyGit",
+        		"LazyGitConfig",
+        		"LazyGitCurrentFile",
+        		"LazyGitFilter",
+        		"LazyGitFilterCurrentFile",
+    		},
+    		-- optional for floating window border decoration
+    		dependencies = {
+        		"nvim-lua/plenary.nvim",
+    		},
+    		-- setting the keybinding for LazyGit with 'keys' is recommended in
+    		-- order to load the plugin when the command is run for the first time
+    		keys = {
+        		{ "<leader>lg", "<cmd>LazyGit<cr>", desc = "LazyGit" }
+    		}
+    	},	
+	{'pandasoli/nekovim'},
 	{ "nvim-tree/nvim-web-devicons", opts = {} },
 	{ 'nvim-lualine/lualine.nvim', dependencies = { 'nvim-tree/nvim-web-devicons' }},
 --	{'nvimdev/dashboard-nvim',event = 'VimEnter',config = function() require('dashboard').setup {} end, dependencies = { {'nvim-tree/nvim-web-devicons'}},
@@ -44,6 +74,9 @@ require("lazy").setup({
   -- automatically check for plugin updates
   checker = { enabled = true },
 })
+
+--require("notify")("My super important message")
+--vim.notify = require("notify")
 
 require("catppuccin").setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha
@@ -102,6 +135,10 @@ require("catppuccin").setup({
 --Set Color scheme
 vim.cmd.colorscheme "catppuccin"
 
+require('hologram').setup{
+    auto_display = true -- WIP automatic markdown image display, may be prone to breaking
+}
+
 --Enable Line Numbers
 vim.wo.number = true
 
@@ -128,6 +165,9 @@ cmp.setup({
     { name = "nvim_lsp" },
   },
 })
+
+---@type func(PresenceMakers, WorkPropsMakers)
+require 'nekovim'.setup {}
 
 -- Needed to improve LSP capabilities for nvim-cmp
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -244,7 +284,7 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {'branch', 'diff', 'diagnostics'},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {require("music-controls")._statusline,'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location'}
   },
