@@ -147,8 +147,7 @@ button:hover {
 }*/
 
 #battery.charging, #battery.plugged {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: #26A65B;
 }
 
 @keyframes blink {
@@ -207,8 +206,7 @@ label:focus {
 }
 
 #pulseaudio.muted {
-    background-color: #151515;
-    color: #2a5c45;
+	color: #FF6060;
 }
 
 #wireplumber {
