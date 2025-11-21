@@ -1,3 +1,8 @@
+@define-color bar rgba(17,17,27,0.8);
+@define-color onbutton #cba6f7;
+@define-color nrmlbutton #1e1e2e;
+@define-color uitext #dcd6f4;
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
     font-family: JetBrainsMono Nerd Font;
@@ -6,8 +11,7 @@
 }
 
 window#waybar {
-    background-color: rgba(17,17,27,0.80);
-    /*border-bottom: 2px solid  ;*/
+    background-color: @bar;
     color: #11111b;
     transition-property: background-color;
     transition-duration: .5s;
@@ -51,7 +55,7 @@ button {
 #language:hover,
 #workspaces button:hover,
 #pulseaudio:hover {
-    background-color: #cba6f7;
+    background-color: @onbutton;
 }
 
 #workspaces button {
@@ -59,7 +63,7 @@ button {
     /*margin: 4 0px;*/
     border-radius: 10px;
     background-color: transparent;
-    color: #ffffff;
+    color: @uitext;
 }
 
 #workspaces button.urgent {
@@ -67,7 +71,6 @@ button {
 }
 #workspaces{
     border-radius: 10px;
-    background-color: #eb4d4b;
 }
 #mode {
     background-color: #64727D;
@@ -87,15 +90,16 @@ button {
     padding-bottom: 4px;
     padding-left: 10px;
     padding-right: 10px;
-    color: #dcd6f4;
+    color: @uitext;
     margin: 4px 0px;
     border-radius: 0px; 
-    background-color: #1e1e2e;
+    background-color: @nrmlbutton;
 }
 
 #custom-power {
     margin: 4px 4px 4px 0px;
     padding-right: 13px;
+    padding-left: 7px;
     border-radius: 0px 5px 5px 0px;
 }
 
@@ -149,17 +153,8 @@ label:focus {
     color: #FF6060;
 }
 
-#tray {
-    /*background-color: #2980b9;*/
-}
-
 #tray > .passive {
     -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-    /*-gtk-icon-effect: highlight;
-    background-color: #eb4d4b;*/
 }
 
 #clock {
